@@ -1,15 +1,16 @@
 #include "ofApp.h"
-#include "Particle.h"
-#include <vector>
+#include "quadtree.h"
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    for (int i = 0; i < 2000; i++) {
-        Particle *p = new Particle();
-        particles.push_back(p);
-
+    //boundary = ;
+    for (int i = 0; i < 300; i++) {
+        int x = glm::gaussRand(ofGetWindowWidth() / 2, ofGetWindowWidth() / 8);
+        int y = glm::gaussRand(ofGetWindowHeight() / 2, ofGetWindowHeight() / 8);
+        //fill vector with query data?
+        ofPoint p(x, y);
+        qtree->insert(p);
     }
-
 }
 
 //--------------------------------------------------------------
@@ -19,13 +20,17 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    for (int i = 0; i < 2000; i++) {
-        particles[i]->Particle::move();
-        particles[i]->Particle::render();
-        
+    ofBackground(0);
+    
+    &points = qtree->query(qtree.range);
+    for (int p = 0; p < &points.length(); p++) {
+        ofSetColor(0,255,0);
+        ofNoFill();
+        //draw the points bright green
+        points(p.x, p.y);
     }
     
-    ofBackground(0, 0, 0);
+    show(qtree);
 
 }
 

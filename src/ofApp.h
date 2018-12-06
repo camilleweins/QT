@@ -1,9 +1,6 @@
 #pragma once
 
 #include "ofMain.h"
-#include "Particle.h"
-#include "Qtree.h"
-#include <vector>
 
 class ofApp : public ofBaseApp{
 
@@ -23,7 +20,8 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-		
-        vector<Particle*>particles; //new vector
+        Qtree qtree;
 
+//        ofRectangle boundary(300, 300, 300, 300);
+		
 };
